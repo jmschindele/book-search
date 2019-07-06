@@ -7,7 +7,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 import { SearchRow } from "../components/StyledRow";
-
+import axios from 'axios';
 class Books extends Component {
   state = {
     books: [],
@@ -15,6 +15,7 @@ class Books extends Component {
     author: "",
     description: ""
   };
+
 
   componentDidMount() {
     this.loadBooks();
@@ -42,14 +43,48 @@ class Books extends Component {
   };
 
   handleFormSubmit = event => {
+    const key = 'AIzaSyDNy-1pxEVcBBjaXWR2gD5EZIOqNA9f-Kw';
     event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
+    let title = this.state.title
+    if (this.state.title) {
+      let URL = `https://www.googleapis.com/books/v1/volumes?q=${title}&key=${key}`;
+      axios.get(URL)
+      .then(function(res) {
+        // console.log(res.data.items)
+        // for (var i = 0; i < res.data.items.length; i++){
+        //   console.log(res.data.items[i].volumeInfo.title)
+        // }
+
+        const arr = res.data.items
+        const mapBooks = arr.map(n => 
+          `
+        Title: ${n.volumeInfo.title}
+        Author(s): ${n.volumeInfo.authors}
+        Description: ${n.volumeInfo.description}
+        Image: ${n.volumeInfo.imageLinks.thumbnail}
+        Link: ${n.volumeInfo.infoLink}
+      `
+        )
+        console.log(mapBooks);
+// expected output: Array [2, 8, 18, 32]
+
+        // let results = res.data;
+        // console.log('results are in ' + results)
+        /*console.log(`
+        Title: ${res.data.items[i].volumeInfo.title}
+        Author(s): ${res.data.items[i].volumeInfo.authors}
+        Description: ${res.data.items[i].volumeInfo.description}
+        Image: ${res.data.items[i].volumeInfo.imageLinks.thumbnail}
+        Link: ${res.data.items[i].volumeInfo.infoLink}
+      `);
+      this({
+        title: res.data.items[i].volumeInfo.title,
+        authors: res.data.items[i].volumeInfo.authors,
+        description: res.data.items[i].volumeInfo.description,
+        image: res.data.items[i].volumeInfo.imageLinks.thumbnail,
+        link: res.data.items[i].volumeInfo.infoLink
+      }); */
       })
-        .then(res => this.loadBooks())
         .catch(err => console.log(err));
     }
   };
@@ -86,7 +121,7 @@ class Books extends Component {
           <Col size="md-12">
             <Row>
               <List>
-                
+
               </List>
             </Row>
           </Col>
