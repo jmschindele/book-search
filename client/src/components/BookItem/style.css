@@ -1,0 +1,32 @@
+li {
+    list-style: none;
+    width: 100%;
+}
+
+.bookItem {
+    background: #4d306f;
+    border-radius: 8px;
+    border: 2px solid darkorange;
+    padding: 15px;
+    color: white;
+    margin: 30px auto;
+    width: 100%;
+}
+
+.bookItem ul {
+    width: 100%;
+    margin: 0;
+}
+
+.bookItem h2 {
+    color: whitesmoke;
+    font-weight: bolder;
+}
+
+.bookItem button {
+    border-radius: 3px;
+    background: #ffc108;
+    color: darkslateblue;
+    border: black;
+    margin-left: 80%;
+}
