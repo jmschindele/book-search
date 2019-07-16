@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Col, Row } from "../components/Grid";
 import { Input } from "../components/Form";
 import { SearchRow } from "../components/StyledRow";
@@ -45,7 +45,7 @@ this.handleAddClick = this.handleAddClick.bind(BookCard)
 
     handleAddClick = event => {
         event.preventDefault();
-        console.log('itsa me, the click handler!')
+        console.log('itsa me, the add handler!')
         // let { title, authors, description, imageLinks} = book.volumeInfo;
         this.state.books.map(book => {
             return(
@@ -65,7 +65,7 @@ this.handleAddClick = this.handleAddClick.bind(BookCard)
             description : this.description,
             image : this.imageLinks
         })
-        .then(res => alert('add successful'))
+        .then(alert(this.title + ' was added to your list'))
         .catch(err => console.log(err));
     }
 
@@ -114,12 +114,10 @@ this.handleAddClick = this.handleAddClick.bind(BookCard)
           </Col>
           <Col size="md-12">
             <Row>
-              {/* <List> */}
 <SearchResults
     books={this.state.books}
     onClick={this.handleAddClick}
     />
-              {/* </List> */}
             </Row>
           </Col>
         </Row>

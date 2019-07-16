@@ -23,10 +23,14 @@ li {
     font-weight: bolder;
 }
 
-.bookItem button {
+.btn-delete {
     border-radius: 3px;
     background: #ffc108;
     color: darkslateblue;
     border: black;
     margin-left: 80%;
+}
+
+.btn-add-view {
+    background-color: purple;
 }

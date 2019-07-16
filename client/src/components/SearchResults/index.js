@@ -1,11 +1,12 @@
 import React from 'react';
-import BookCard from '../BookItem'
+import BookItem from '../BookItem'
+
 
 const SearchResults = props => {
     return(
         <div className='container search-results'>
             {props.books.map((book, i) => (
-                <BookCard {...props}
+                <BookItem {...props}
                 id={book._id}
                 key={i}
                 title={book.volumeInfo.title}
@@ -13,9 +14,8 @@ const SearchResults = props => {
                 description={book.volumeInfo.description}
                 link={book.infoLink}
                 >
-                    <button {...props} name='save-btn' onClick={props.handleAddClick}>Add</button>
-                    <button name='view-btn'><span href={props.link}>View</span></button>
-                </BookCard>
+                    <button {...props} name='save-btn' className='btn-delete' onClick={props.handleAddClick}>Add</button>
+                </BookItem>
             ))}
         </div>
 

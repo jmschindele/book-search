@@ -50,7 +50,7 @@ this.loadBooks();
         </div>
         <div className='row'>
 
-          <Col size="md-10 md-offset-1">
+          <Col size="md-12">
 
             {this.state.books.map(book => (
               <BookCard
@@ -62,7 +62,7 @@ this.loadBooks();
                image={book.image}
                link={book.link}
                >
-               <button onClick={() => this.removeBook(book._id)} > Delete </button> 
+               <button className='btn-delete' onClick={() => this.removeBook(book._id)} > Delete </button> 
                </ BookCard>
             ))}
 
