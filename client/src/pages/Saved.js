@@ -32,7 +32,6 @@ this.loadBooks();
 
   removeBook = id => {
     API.deleteBook(id)
-    .then(res => alert("Book done been goned."))
     .then(res => this.loadBooks())
     .catch(err => console.log(err))
   }
