@@ -2,12 +2,12 @@ import React, { Component } from "react";
 // import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Col, Row } from "../components/Grid";
 // import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 import { SearchRow } from "../components/StyledRow";
-import BookCard from "../components/BookCard";
+import BookCard from "../components/BookItem";
 import SearchResults from "../components/SearchResults"
 // import axios from 'axios';
 
@@ -94,12 +94,24 @@ this.handleAddClick = this.handleAddClick.bind(BookCard)
                 name="title"
                 placeholder="Title (required)"
               />
-              <FormBtn
+ 
+              <button
+                className='btn btn-success float-right'
                 disabled={!this.state.title}
                 onClick={this.handleFormSubmit}
               >
                 Submit Book
-              </FormBtn>
+              </button>
+            
+            
+                <Link to='/books'>
+                    <div className='row'><div className='col-12 pull-right'>
+                <button className='btn btn-warning mx-auto'>
+                View Saved Books
+                </button>
+                </div></div>
+                </Link>
+  
             </form>
             <br />
             </SearchRow>

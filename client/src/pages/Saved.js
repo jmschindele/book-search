@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import BookCard from "../components/BookCard"
+import BookCard from "../components/BookItem"
 class Saved extends Component {
   state = {
     title: "",
@@ -30,19 +30,25 @@ this.loadBooks();
       .catch(err => console.log(err));
   };
 
+  removeBook = id => {
+    API.deleteBook(id)
+    .then(res => alert("Book done been goned."))
+    .then(res => this.loadBooks())
+    .catch(err => console.log(err))
+  }
   render() {
     return (
-      <Container fluid>
-        <Row>
+<>
+        <div className='row'>
           <Col size="md-12">
             <Jumbotron>
               <h1>
-                Books Dawg
+                Saved Books
               </h1>
             </Jumbotron>
           </Col>
-        </Row>
-        <Row>
+        </div>
+        <div className='row'>
 
           <Col size="md-10 md-offset-1">
 
@@ -61,14 +67,14 @@ this.loadBooks();
             ))}
 
           </Col>
-        </Row>
+        </div>
 
-        <Row>
+        <div className='row'>
           <Col size="md-2">
-            <Link to="/">← Back to Authors</Link>
+            <Link to="/">← Back to Search</Link>
           </Col>
-        </Row>
-      </Container>
+        </div>
+</>  
     );
   }
 }

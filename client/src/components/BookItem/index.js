@@ -1,22 +1,7 @@
 import React from 'react';
 
-// const styles = {
-//     cardContainer: {
-//       display: "inline-grid",
-//       margin: "10px"
-//     },
-//     card: {
-//       maxWidth: "300px",
-//       display: "inline-block"
-//     },
-//     media: {
-//       objectFit: "cover"
-//     }
-//   };
-
-  const BookCard = props => {
+  const BookItem = props => {
       
-
       return(
         <div className="card">
             <ul>
@@ -33,4 +18,4 @@ import React from 'react';
       )
   }
 
-  export default BookCard
+  export default BookItem
