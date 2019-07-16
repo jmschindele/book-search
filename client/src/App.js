@@ -1,24 +1,26 @@
-import React from "react";
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Search from "./pages/Search";
 import Saved from "./pages/Saved";
-import NoMatch from "./pages/NoMatch";
+import Search from "./pages/Search";
 import Nav from "./components/Nav";
+import NoMatch from "./pages/NoMatch";
+import {Container,
+  //  Row, Col
+  } from "./components/Grid"; 
 
 function App() {
-  return (
-    <Router>
-      <div>
-        <Nav />
+  return(
+  <Router>
+    <Container>
+      <Nav />
         <Switch>
-          <Route exact path="/" component={Search} />
-          <Route exact path="/books" component={Saved} />
-          <Route exact path="/books/:id" component={Saved} />
-          <Route component={NoMatch} />
+        <Route exact path="/" component={Search} />
+        <Route exact path="/books" component={Saved} />
+        <Route exact path="/books/:id" component={Search} />
+        <Route component={NoMatch} />
         </Switch>
-      </div>
-    </Router>
-  );
+    </Container>
+  </Router>
+  )
 }
-
 export default App;

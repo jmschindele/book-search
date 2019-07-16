@@ -1,39 +1,33 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
+// import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
+// import { Link } from "react-router-dom";
+import { Col, Row } from "../components/Grid";
+// import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 import { SearchRow } from "../components/StyledRow";
-import axios from 'axios';
-class Books extends Component {
-  state = {
+import BookCard from "../components/BookCard";
+import SearchResults from "../components/SearchResults"
+// import axios from 'axios';
+
+
+class Search extends Component {
+    constructor(props) {
+        super(props);
+    
+
+  this.state = {
+    // search: "",
     books: [],
     title: "",
-    author: "",
-    description: ""
+    authors: [],
+    description: "",
+    image: "",
+    link: ""
   };
-
-
-  componentDidMount() {
-    this.loadBooks();
-  }
-
-  loadBooks = () => {
-    API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-      )
-      .catch(err => console.log(err));
-  };
-
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
-  };
+this.handleAddClick = this.handleAddClick.bind(BookCard)
+    };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -43,55 +37,47 @@ class Books extends Component {
   };
 
   handleFormSubmit = event => {
-    const key = 'AIzaSyDNy-1pxEVcBBjaXWR2gD5EZIOqNA9f-Kw';
     event.preventDefault();
-    let title = this.state.title
-    if (this.state.title) {
-      let URL = `https://www.googleapis.com/books/v1/volumes?q=${title}&key=${key}`;
-      axios.get(URL)
-      .then(function(res) {
-        // console.log(res.data.items)
-        // for (var i = 0; i < res.data.items.length; i++){
-        //   console.log(res.data.items[i].volumeInfo.title)
-        // }
-
-        const arr = res.data.items
-        const mapBooks = arr.map(n => 
-          `
-        Title: ${n.volumeInfo.title}
-        Author(s): ${n.volumeInfo.authors}
-        Description: ${n.volumeInfo.description}
-        Image: ${n.volumeInfo.imageLinks.thumbnail}
-        Link: ${n.volumeInfo.infoLink}
-      `
-        )
-        console.log(mapBooks);
-// expected output: Array [2, 8, 18, 32]
-
-        // let results = res.data;
-        // console.log('results are in ' + results)
-        /*console.log(`
-        Title: ${res.data.items[i].volumeInfo.title}
-        Author(s): ${res.data.items[i].volumeInfo.authors}
-        Description: ${res.data.items[i].volumeInfo.description}
-        Image: ${res.data.items[i].volumeInfo.imageLinks.thumbnail}
-        Link: ${res.data.items[i].volumeInfo.infoLink}
-      `);
-      this({
-        title: res.data.items[i].volumeInfo.title,
-        authors: res.data.items[i].volumeInfo.authors,
-        description: res.data.items[i].volumeInfo.description,
-        image: res.data.items[i].volumeInfo.imageLinks.thumbnail,
-        link: res.data.items[i].volumeInfo.infoLink
-      }); */
-      })
+    API.searchBooks(this.state.title)
+        .then(res => {
+            console.log(res.data.items);
+            this.setState({books: [...res.data.items]})
+            })
         .catch(err => console.log(err));
     }
-  };
+
+
+    handleAddClick = event => {
+        event.preventDefault();
+        console.log('itsa me, the click handler!')
+        // let { title, authors, description, imageLinks} = book.volumeInfo;
+        this.state.books.map(book => {
+            return(
+            this.setState(
+            this.key = book._id,
+            this.id = book._id,
+            this.title = book.volumeInfo.title,
+            this.authors = book.volumeInfo.authors,
+            this.description = book.volumeInfo.description,
+            this.image = book.volumeInfo.imageLinks
+            ))
+        })
+        console.log(this.title, this.authors, this.description, this.image)
+        API.saveBook({
+            title : this.title,
+            authors : this.authors,
+            description : this.description,
+            image : this.imageLinks
+        })
+        .then(res => alert('add successful'))
+        .catch(err => console.log(err));
+    }
+
 
   render() {
     return (
-      <Container fluid>
+        
+        <>
         <Row>
           <Col size="md-12">
             <Jumbotron>
@@ -120,15 +106,19 @@ class Books extends Component {
           </Col>
           <Col size="md-12">
             <Row>
-              <List>
-
-              </List>
+              {/* <List> */}
+<SearchResults
+    books={this.state.books}
+    onClick={this.handleAddClick}
+    />
+              {/* </List> */}
             </Row>
           </Col>
         </Row>
-      </Container>
+      </>
     );
   }
 }
 
-export default Books;
+export default Search;
+

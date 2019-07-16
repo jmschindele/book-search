@@ -1,16 +1,30 @@
-import React from "react";
-import "./style.css";
+import React, { Component } from "react";
+import "./ListItem";
 
-// This file exports both the List and ListItem components
-
-export function List({ children }) {
-  return (
-    <div className="list-overflow-container">
-      <ul className="list-group">{children}</ul>
-    </div>
-  );
+class List extends Component {
+  render() {
+    return (
+      <ul>
+        {this.props.books.map((book, i) => {
+          let { title, imageLinks, infoLink } = book.volumeInfo;
+          return (
+            <li>
+              <a key={i} className="book" href={infoLink} target="_blank">
+                <img
+                  src={
+                    undefined !== imageLinks ? imageLinks.thumbnail : { title }
+                  }
+                  alt="book image"
+                  className="bookCover"
+                />
+                <header>{title}</header>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
 }
 
-export function ListItem({ children }) {
-  return <li className="list-group-item">{children}</li>;
-}
+export default List;
