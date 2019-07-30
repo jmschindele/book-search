@@ -3,7 +3,7 @@
 
 An application that uses Axios to make a API call to google books and allows users to save the books that they are interested in.
 
-Visit our Heroku Deployed Link: https://sleepy-badlands-49747.herokuapp.com/
+Visit the Heroku Deployed Link: https://sleepy-badlands-49747.herokuapp.com/
 
 Uses Mongo, Express, React and Node.JS
 
