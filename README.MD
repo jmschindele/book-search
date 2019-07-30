@@ -12,10 +12,10 @@ If you would like to download and use this code you will need to:
 * run npm install in the command line to download package.json dependencies.
 * create a Heroku app with MongoLab add-on
   
-  ## Getting Started
-  1. Create a New Book
-  2. View Saved Books
-  3. Deleting a Book
+## Getting Started
+1. Create a New Book
+2. View Saved Books
+3. Deleting a Book
   
   ### Create a New Book
   * Upon opening the application, you will be presented with the book search screen.
